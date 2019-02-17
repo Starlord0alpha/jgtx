@@ -7,7 +7,6 @@
 package com.mining.web.framework.service;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,6 +17,7 @@ import java.util.Properties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.mining.web.framework.helper.DatabaseHelper;
 import com.mining.web.framework.model.Customer;
 import com.mining.web.framework.util.PropsUtil;
 
@@ -28,25 +28,6 @@ import com.mining.web.framework.util.PropsUtil;
 public class CustomerService {
     private static Logger LOGGER = LoggerFactory.getLogger(CustomerService.class);
 
-    private static final String DRIVER;
-    private static final String URL;
-    private static final String USERNAME;
-    private static final String PASSWORD;
-
-    static {
-        Properties conf = PropsUtil.loadProps("config.properties");
-        DRIVER = conf.getProperty("jdbc.driver");
-        URL = conf.getProperty("jdbc.url");
-        USERNAME = conf.getProperty("jdbc.username");
-        PASSWORD = conf.getProperty("jdbc.password");
-
-        try {
-            Class.forName(DRIVER);
-        } catch (ClassNotFoundException e) {
-            LOGGER.error("cannot load jdbc driver", e);
-        }
-    }
-
     /**
      * 获取客户列表
      */
@@ -55,7 +36,7 @@ public class CustomerService {
         try {
             List<Customer> customerList = new ArrayList<>();
             String sql = "SELECT  * FROM customer";
-            conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            conn = DatabaseHelper.getConnection();
             PreparedStatement stmt = conn.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
             while ( rs.next() ) {
@@ -73,13 +54,7 @@ public class CustomerService {
         } catch (SQLException e) {
             LOGGER.error("execute sql failure", e);
         } finally {
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) {
-                    LOGGER.error("close connection failure", e);
-                }
-            }
+            DatabaseHelper.closeConnection(conn);
         }
 
         return null;

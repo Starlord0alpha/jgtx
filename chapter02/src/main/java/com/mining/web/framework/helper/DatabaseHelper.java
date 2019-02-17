@@ -42,7 +42,7 @@ public class DatabaseHelper {
     public static Connection getConnection() {
         Connection conn = null;
         try {
-            conn = DriverManager.getConnection(DRIVER, USERNAME, PASSWORD);
+            conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
         } catch (SQLException e) {
             LOGGER.error("get connection failure", e);
         }
