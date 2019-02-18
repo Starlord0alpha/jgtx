@@ -35,7 +35,6 @@ public class CustomerServiceTest {
         List<Customer> customerList = customerService.getCustomerList();
         Assert.assertEquals(2, customerList.size());
     }
-/*
     @Test
     public void getCustomerTest() throws Exception {
         long id = 1;
@@ -61,12 +60,10 @@ public class CustomerServiceTest {
         boolean result = customerService.updateCustomer(id, fieldMap);
         Assert.assertTrue(result);
     }
-
     @Test
     public void deleteCustomerTest() throws Exception {
-        long id = 1;
+        long id = 3;
         boolean result = customerService.deleteCustomer(id);
         Assert.assertTrue(result);
     }
-    */
 }

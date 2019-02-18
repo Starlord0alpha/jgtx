@@ -6,8 +6,6 @@
 
 package com.mining.web.framework.service;
 
-import java.sql.Connection;
-// import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -29,45 +27,36 @@ public class CustomerService {
      * 获取客户列表
      */
     public List<Customer> getCustomerList() {
-        Connection conn = null;
-        try {
-            String sql = "SELECT  * FROM customer";
-            conn = DatabaseHelper.getConnection();
-            return DatabaseHelper.queryEntityList(Customer.class, conn, sql);
-        } finally {
-            DatabaseHelper.closeConnection(conn);
-        }
+        String sql = "SELECT  * FROM customer";
+        return DatabaseHelper.queryEntityList(Customer.class, sql);
     }
 
     /**
      * 获取客户
      */
     public Customer getCustomer(long id) {
-        // TODO
-        return null;
+        String sql = "SELECT * FROM customer where id = ?";
+        return DatabaseHelper.queryEntity(Customer.class, sql, id);
     }
 
     /**
      * 创建客户
      */
     public boolean createCustomer(Map<String, Object> fieldMap) {
-        // TODO
-        return false;
+        return DatabaseHelper.insertEntity(Customer.class, fieldMap);
     }
 
     /**
      * 更新客户
      */
     public boolean updateCustomer(long id, Map<String, Object> fieldMap) {
-        // TODO
-        return false;
+        return DatabaseHelper.updateEntity(Customer.class, id, fieldMap);
     }
 
     /**
      * 删除客户
      */
     public boolean deleteCustomer(long id) {
-        // TODO
-        return false;
+        return DatabaseHelper.deleteEntity(Customer.class, id);
     }
 }
