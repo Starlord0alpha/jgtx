@@ -7,6 +7,7 @@
 package com.mining.web.framework.controller;
 
 import java.io.IOException;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -33,6 +34,6 @@ public class CustomerServlet extends HttpServlet{
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
         List<Customer> customerList = customerService.getCustomerList();
         req.setAttribute("customerList", customerList);
-        req.getRequestDispatcher("/WEB-INF/view/customer.jsp").forwar(req, resp);
+        req.getRequestDispatcher("/WEB-INF/view/customer.jsp").forward(req, resp);
     } 
 }
