@@ -23,7 +23,7 @@ public class CustomerCreateServlet extends HttpServlet {
      * 进入 创建客户 界面
      */
     @Override
-    protected  void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
         // TODO
     } 
 
