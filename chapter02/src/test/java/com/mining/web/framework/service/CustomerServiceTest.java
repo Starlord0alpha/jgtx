@@ -13,6 +13,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import com.mining.web.framework.model.Customer;
+import com.mining.web.framework.helper.DatabaseHelper;
 
 /**
  * class: CustomerServiceTest
@@ -27,7 +28,7 @@ public class CustomerServiceTest {
 
     @Before
     public void init() {
-        // TODO 初始化数据库
+        DatabaseHelper.executeSqlFile("create.sql");
     }
 
     @Test
