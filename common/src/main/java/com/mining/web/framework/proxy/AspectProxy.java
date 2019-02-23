@@ -14,7 +14,7 @@ import org.slf4j.LoggerFactory;
  * class: AspectProxy
  * desc: 
  */
-public class AspectProxy implements Proxy {
+public abstract class AspectProxy implements Proxy {
     private static final Logger logger = LoggerFactory.getLogger(AspectProxy.class);
 
     @Override
