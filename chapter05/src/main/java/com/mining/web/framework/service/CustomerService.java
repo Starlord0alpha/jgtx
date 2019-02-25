@@ -12,7 +12,9 @@ import java.util.Properties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.mining.web.framework.bean.FileParam;
 import com.mining.web.framework.helper.DatabaseHelper;
+import com.mining.web.framework.helper.UploadHelper;
 import com.mining.web.framework.model.Customer;
 import com.mining.web.framework.util.PropsUtil;
 
@@ -42,8 +44,12 @@ public class CustomerService {
     /**
      * 创建客户
      */
-    public boolean createCustomer(Map<String, Object> fieldMap) {
-        return DatabaseHelper.insertEntity(Customer.class, fieldMap);
+    public boolean createCustomer(Map<String, Object> fieldMap, FileParam fileParam) {
+        boolean result = DatabaseHelper.insertEntity(Customer.class, fieldMap);
+        if (result) {
+            UploadHelper.uploadFile("/tmp/upload", fileParam);
+        }
+        return 
     }
 
     /**

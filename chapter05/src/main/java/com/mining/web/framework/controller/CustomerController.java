@@ -14,7 +14,7 @@ public class CustomerController {
      * 进入 客户列表 页面
      */
     @Action("get:/customer")
-    public View index(Param param) {
+    public View index() {
         List<Customer> customerList = customerService.getCustomerList();
         return new View("customer.jsp").addModel("customerList", customerList);
     }
@@ -42,8 +42,9 @@ public class CustomerController {
      */
     @Action("post:/customer_create")
     public Data createSubmit(Param param) {
-        Map<String, Object> fieldMap = param.getMap();
-        boolean result = customerService.createCustomer(fieldMap);
+        Map<String, Object> fieldMap = param.getFieldMap();
+        FileParam fileParam = param.getFile("photo");
+        boolean result = customerService.createCustomer(fieldMap, fileParam);
         return new Data(result);
     }
 
